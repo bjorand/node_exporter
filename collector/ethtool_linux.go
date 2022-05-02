@@ -139,6 +139,31 @@ func makeEthtoolCollector(logger log.Logger) (*ethtoolCollector, error) {
 				"Network interface packets sent",
 				[]string{"device"}, nil,
 			),
+			"bw_in_allowance_exceeded": prometheus.NewDesc(
+				prometheus.BuildFQName(namespace, "ethtool", "bw_in_allowance_exceeded"),
+				"The number of packets queued or dropped because the inbound aggregate bandwidth exceeded the maximum for the instance",
+				[]string{"device"}, nil,
+			),
+			"bw_out_allowance_exceeded": prometheus.NewDesc(
+				prometheus.BuildFQName(namespace, "ethtool", "bw_out_allowance_exceeded"),
+				"The number of packets queued or dropped because the outbound aggregate bandwidth exceeded the maximum for the instance",
+				[]string{"device"}, nil,
+			),
+			"conntrack_allowance_exceeded": prometheus.NewDesc(
+				prometheus.BuildFQName(namespace, "ethtool", "conntrack_allowance_exceeded"),
+				"The number of packets dropped because connection tracking exceeded the maximum for the instance and new connections could not be established. This can result in packet loss for traffic to or from the instance",
+				[]string{"device"}, nil,
+			),
+			"linklocal_allowance_exceeded": prometheus.NewDesc(
+				prometheus.BuildFQName(namespace, "ethtool", "linklocal_allowance_exceeded"),
+				"The number of packets dropped because the PPS of the traffic to local proxy services exceeded the maximum for the network interface. This impacts traffic to the DNS service, the Instance Metadata Service, and the Amazon Time Sync Service",
+				[]string{"device"}, nil,
+			),
+			"pps_allowance_exceeded": prometheus.NewDesc(
+				prometheus.BuildFQName(namespace, "ethtool", "pps_allowance_exceeded"),
+				"The number of packets queued or dropped because the bidirectional PPS exceeded the maximum for the instance",
+				[]string{"device"}, nil,
+			),
 
 			// link info
 			"supported_port": prometheus.NewDesc(
